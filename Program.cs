@@ -1,4 +1,7 @@
 ﻿using Confluent.Kafka;
+using System.Text.Json;
+using ProductHandlerKafka.Models;
+
 // See https://aka.ms/new-console-template for more information
 Console.WriteLine("Run Product Consumer App !");
 
@@ -30,6 +33,7 @@ using (var consumer = new ConsumerBuilder<Ignore, string>(conf).Build())
         while (true)
         {
             var cr = consumer.Consume(cts.Token);
+            var items = JsonSerializer.Deserialize<ItemsDto>(cr.Value);
         }
     }
     catch (OperationCanceledException)
