@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using ProductHandlerKafka.Models;
 
 
@@ -15,7 +16,14 @@ namespace ProductHandlerKafka.DB
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=127.0.0.1,1433;Database=productApi;User Id=sa;Password=Mau123&&&");
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var connectionString = configuration.GetConnectionString("myConnection");
+
+            optionsBuilder.UseSqlServer(connectionString);
         }
     }
 }

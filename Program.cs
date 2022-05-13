@@ -11,6 +11,8 @@ using ProductHandlerKafka.DB;
 Console.WriteLine("Run Product Consumer App !");
 
 
+
+
 string nomeTopic = "fila_produto";
 
 var conf = new ConsumerConfig
@@ -46,7 +48,6 @@ using (var consumer = new ConsumerBuilder<Ignore, string>(conf).Build())
                 {
                     using (var context = new ProductContext())
                     {
-                        var products = context.Products.ToList();
                         items.ToList().ForEach(vm =>
                                    {
                                        var product = context.Products.Find(vm.Id);
