@@ -8,17 +8,18 @@ using ProductHandlerKafka.Models;
 using ProductHandlerKafka.DB;
 
 // See https://aka.ms/new-console-template for more information
-Console.WriteLine("Run Product Consumer App !");
+Console.WriteLine("Run Product Consumer App 09!");
+Console.WriteLine(Directory.GetCurrentDirectory());
 
 
 
 
-string nomeTopic = "fila_produto";
+string nomeTopic = "updateamount";
 
 var conf = new ConsumerConfig
 {
-    GroupId = "fila-consumer-product",
-    BootstrapServers = "localhost:9092",
+    GroupId = "updateamount",
+    BootstrapServers = "kafka:9092",
     AutoOffsetReset = AutoOffsetReset.Earliest
 };
 
